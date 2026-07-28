@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@600;700;800&family=Mitr:wght@600;700&family=Chakra+Petch:wght@700&family=Bai+Jamjuree:wght@700&family=Anuphan:wght@700&family=Anton&family=Oswald:wght@600;700&family=Playfair+Display:wght@700;800&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@600;700;800&family=Mitr:wght@600;700&family=Chakra+Petch:wght@700&family=Bai+Jamjuree:wght@700&family=Anuphan:wght@700;800&family=Prompt:wght@700;800&family=Sarabun:wght@700;800&family=IBM+Plex+Sans+Thai:wght@700&family=Sriracha&family=Charm:wght@700&family=Charmonman:wght@700&family=Pattaya&family=Noto+Sans+Thai:wght@800;900&family=Anton&family=Oswald:wght@600;700&family=Playfair+Display:wght@700;800;900&family=Noto+Serif:wght@700;900&family=Bebas+Neue&family=Archivo+Black&family=Teko:wght@600;700&family=Montserrat:wght@800;900&family=Passion+One:wght@700;900&family=Rubik+Mono+One&display=swap" rel="stylesheet">
 
 <style>
   :root{
@@ -83,6 +83,9 @@
   .empty{aspect-ratio:1080/1500;width:100%;max-width:400px;border:1.5px dashed var(--line);border-radius:9px;
     display:grid;place-items:center;color:var(--muted);font-size:14px;text-align:center;padding:20px}
   .status{font-size:11.5px;color:var(--accent2);min-height:14px;text-align:center}
+  .clab{font-size:11px;color:var(--muted);margin-bottom:3px}
+  input[type=color]{width:100%;height:34px;border:1px solid var(--line);border-radius:8px;background:var(--panel2);cursor:pointer;padding:2px}
+  #head-shbox,#head-hlbox{padding-left:4px;border-left:2px solid var(--line);margin:2px 0 4px 4px}
 </style>
 
 <div class="wrap">
@@ -195,21 +198,42 @@
         <div class="body">
           <div class="field"><input type="text" id="t-head" value="เจ้าสัวปืนใหญ่"></div>
           <div class="field"><label>ฟอนต์</label>
-            <select id="head-font">
-              <option value="Kanit">Kanit (หนา กลม)</option>
-              <option value="Mitr">Mitr</option>
-              <option value="Chakra Petch">Chakra Petch (เหลี่ยม)</option>
-              <option value="Bai Jamjuree">Bai Jamjuree</option>
-              <option value="Anuphan">Anuphan</option>
-            </select>
+            <select id="head-font" class="fontsel-th"></select>
           </div>
           <div class="slider"><div class="lab"><span>ขนาด</span><span id="v-heads">อัตโนมัติ</span></div>
-            <input type="range" id="head-s" min="40" max="200" value="0"><div class="lab" style="margin-top:2px"><span style="font-size:10px">ซ้ายสุด = ปรับพอดีอัตโนมัติ</span></div></div>
+            <input type="range" id="head-s" min="40" max="240" value="0"><div class="lab" style="margin-top:2px"><span style="font-size:10px">ซ้ายสุด = ปรับพอดีอัตโนมัติ</span></div></div>
           <div class="row">
             <div class="slider"><div class="lab"><span>ซ้าย-ขวา</span></div><input type="range" id="head-x" min="-100" max="100" value="0"></div>
             <div class="slider"><div class="lab"><span>ขึ้น-ลง</span></div><input type="range" id="head-y" min="-100" max="100" value="0"></div>
           </div>
-          <label class="toggle"><input type="checkbox" id="head-line" checked> แสดงเส้นใต้ข้อความ</label>
+
+          <label style="margin-top:6px">สไตล์ตัวอักษร</label>
+          <div class="row" style="margin-bottom:8px">
+            <div><div class="clab">สีตัวอักษร</div><input type="color" id="head-col" value="#ffffff" class="col"></div>
+            <div><div class="clab">สีขอบ</div><input type="color" id="head-scol" value="#281410" class="col"></div>
+          </div>
+          <div class="slider"><div class="lab"><span>ความหนาขอบ</span><span id="v-headsw">9</span></div>
+            <input type="range" id="head-sw" min="0" max="24" value="9"></div>
+
+          <label class="toggle"><input type="checkbox" id="head-sh" checked> เงาตัวอักษร</label>
+          <div id="head-shbox">
+            <div class="row" style="margin-bottom:6px">
+              <div><div class="clab">สีเงา</div><input type="color" id="head-shcol" value="#000000" class="col"></div>
+              <div class="slider" style="margin:0"><div class="lab"><span>ฟุ้ง</span><span id="v-headshb">14</span></div>
+                <input type="range" id="head-shb" min="0" max="40" value="14"></div>
+            </div>
+            <div class="row">
+              <div class="slider" style="margin:0"><div class="lab"><span>เลื่อน X</span></div><input type="range" id="head-shx" min="-30" max="30" value="0"></div>
+              <div class="slider" style="margin:0"><div class="lab"><span>เลื่อน Y</span></div><input type="range" id="head-shy" min="-30" max="30" value="6"></div>
+            </div>
+          </div>
+
+          <label class="toggle" style="margin-top:8px"><input type="checkbox" id="head-hl"> ไฮไลต์พื้นหลังข้อความ</label>
+          <div id="head-hlbox" style="opacity:.4;pointer-events:none">
+            <div class="clab">สีไฮไลต์</div><input type="color" id="head-hlcol" value="#e8622a" class="col">
+          </div>
+
+          <label class="toggle" style="margin-top:8px"><input type="checkbox" id="head-line" checked> แสดงเส้นใต้ข้อความ</label>
         </div>
       </details>
 
@@ -219,20 +243,22 @@
         <div class="body">
           <div class="field"><input type="text" id="t-name" value="Vinicius JR"></div>
           <div class="field"><label>ฟอนต์</label>
-            <select id="name-font">
-              <option value="Noto Serif">Noto Serif (มีเชิง)</option>
-              <option value="Playfair Display">Playfair Display</option>
-              <option value="Anton">Anton (หนาสูง)</option>
-              <option value="Oswald">Oswald (แคบ)</option>
-              <option value="Kanit">Kanit</option>
-            </select>
+            <select id="name-font" class="fontsel-all"></select>
           </div>
           <div class="slider"><div class="lab"><span>ขนาด</span><span id="v-names">52</span></div>
-            <input type="range" id="name-s" min="26" max="110" value="52"></div>
+            <input type="range" id="name-s" min="26" max="130" value="52"></div>
           <div class="row">
             <div class="slider"><div class="lab"><span>ซ้าย-ขวา</span></div><input type="range" id="name-x" min="-100" max="100" value="0"></div>
             <div class="slider"><div class="lab"><span>ขึ้น-ลง</span></div><input type="range" id="name-y" min="-100" max="100" value="0"></div>
           </div>
+          <label style="margin-top:6px">สไตล์ตัวอักษร</label>
+          <div class="row" style="margin-bottom:8px">
+            <div><div class="clab">สีตัวอักษร</div><input type="color" id="name-col" value="#ffffff" class="col"></div>
+            <div><div class="clab">สีขอบ</div><input type="color" id="name-scol" value="#000000" class="col"></div>
+          </div>
+          <div class="slider"><div class="lab"><span>ความหนาขอบ</span><span id="v-namesw">0</span></div>
+            <input type="range" id="name-sw" min="0" max="16" value="0"></div>
+          <label class="toggle"><input type="checkbox" id="name-sh" checked> เงาตัวอักษร</label>
         </div>
       </details>
 
@@ -273,8 +299,36 @@ const S={
   cut:null, cutTol:30, cutLock:true, cutS:1, cutX:0, cutY:0,
   logo:null, logoS:1,
   head:'เจ้าสัวปืนใหญ่', headFont:'Kanit', headS:0, headX:0, headY:0, headLine:true,
+  headCol:'#ffffff', headScol:'#281410', headSw:9,
+  headSh:true, headShcol:'#000000', headShb:14, headShx:0, headShy:6,
+  headHl:false, headHlcol:'#e8622a',
   name:'Vinicius JR', nameFont:'Noto Serif', nameS:52, nameX:0, nameY:0,
+  nameCol:'#ffffff', nameScol:'#000000', nameSw:0, nameSh:true,
 };
+
+/* ---------- รายชื่อฟอนต์ ---------- */
+const FONTS_TH=[
+  ['Kanit','Kanit — หนา กลม'],['Prompt','Prompt'],['Anuphan','Anuphan'],
+  ['Mitr','Mitr'],['Sarabun','Sarabun'],['IBM Plex Sans Thai','IBM Plex Thai'],
+  ['Bai Jamjuree','Bai Jamjuree'],['Chakra Petch','Chakra Petch — เหลี่ยม'],
+  ['Noto Sans Thai','Noto Sans Thai — หนามาก'],['Sriracha','Sriracha — ลายมือ'],
+  ['Charm','Charm — หวัด'],['Charmonman','Charmonman — คัดลายมือ'],['Pattaya','Pattaya'],
+];
+const FONTS_LATIN=[
+  ['Anton','Anton — หนาสูง'],['Bebas Neue','Bebas Neue — แคบสูง'],['Oswald','Oswald — แคบ'],
+  ['Teko','Teko — แคบบาง'],['Archivo Black','Archivo Black — หนาทึบ'],['Montserrat','Montserrat'],
+  ['Passion One','Passion One'],['Rubik Mono One','Rubik Mono — เหลี่ยมทึบ'],
+  ['Playfair Display','Playfair — มีเชิง'],['Noto Serif','Noto Serif — มีเชิง'],
+];
+function fillFont(sel,list,val){
+  sel.innerHTML='';
+  list.forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;
+    o.style.fontFamily=`'${v}'`;if(v===val)o.selected=true;sel.appendChild(o);});
+}
+// พาดหัว = ฟอนต์ไทย + ละติน (ไทยขึ้นก่อน), ชื่อนักเตะ = ทั้งหมดเช่นกัน
+const ALL=[...FONTS_TH,...FONTS_LATIN];
+fillFont(document.querySelector('.fontsel-th'),ALL,'Kanit');
+fillFont(document.querySelector('.fontsel-all'),[...FONTS_LATIN,...FONTS_TH],'Noto Serif');
 
 if(document.fonts&&document.fonts.ready) document.fonts.ready.then(draw);
 
@@ -365,11 +419,27 @@ $('head-x').addEventListener('input',e=>{S.headX=+e.target.value;draw();});
 $('head-y').addEventListener('input',e=>{S.headY=+e.target.value;draw();});
 $('head-line').addEventListener('change',e=>{S.headLine=e.target.checked;draw();});
 
+$('head-col').addEventListener('input',e=>{S.headCol=e.target.value;draw();});
+$('head-scol').addEventListener('input',e=>{S.headScol=e.target.value;draw();});
+$('head-sw').addEventListener('input',e=>{S.headSw=+e.target.value;$('v-headsw').textContent=e.target.value;draw();});
+$('head-sh').addEventListener('change',e=>{S.headSh=e.target.checked;$('head-shbox').style.display=e.target.checked?'block':'none';draw();});
+$('head-shcol').addEventListener('input',e=>{S.headShcol=e.target.value;draw();});
+$('head-shb').addEventListener('input',e=>{S.headShb=+e.target.value;$('v-headshb').textContent=e.target.value;draw();});
+$('head-shx').addEventListener('input',e=>{S.headShx=+e.target.value;draw();});
+$('head-shy').addEventListener('input',e=>{S.headShy=+e.target.value;draw();});
+$('head-hl').addEventListener('change',e=>{S.headHl=e.target.checked;
+  $('head-hlbox').style.opacity=e.target.checked?1:.4;$('head-hlbox').style.pointerEvents=e.target.checked?'auto':'none';draw();});
+$('head-hlcol').addEventListener('input',e=>{S.headHlcol=e.target.value;draw();});
+
 $('t-name').addEventListener('input',e=>{S.name=e.target.value;draw();});
 $('name-font').addEventListener('change',e=>{S.nameFont=e.target.value;draw();});
 $('name-s').addEventListener('input',e=>{S.nameS=+e.target.value;$('v-names').textContent=e.target.value;draw();});
 $('name-x').addEventListener('input',e=>{S.nameX=+e.target.value;draw();});
 $('name-y').addEventListener('input',e=>{S.nameY=+e.target.value;draw();});
+$('name-col').addEventListener('input',e=>{S.nameCol=e.target.value;draw();});
+$('name-scol').addEventListener('input',e=>{S.nameScol=e.target.value;draw();});
+$('name-sw').addEventListener('input',e=>{S.nameSw=+e.target.value;$('v-namesw').textContent=e.target.value;draw();});
+$('name-sh').addEventListener('change',e=>{S.nameSh=e.target.checked;draw();});
 
 /* ---------- ตัวช่วยวาด ---------- */
 function drawCover(g,img,x,y,w,h,zoom,offX,offY){
@@ -437,11 +507,13 @@ function render(g,SC){
   if(S.name){
     const fs=S.nameS*SC;
     g.font=`700 ${fs}px '${S.nameFont}', serif`;
-    g.textAlign='right';g.textBaseline='top';g.fillStyle='#fff';
-    g.shadowColor='rgba(0,0,0,.6)';g.shadowBlur=8*SC;g.shadowOffsetY=2*SC;
+    g.textAlign='right';g.textBaseline='top';
     const bx=W-M+S.nameX*(W/100)*0.5;
     const by=(S.logo?M+215*SC:M+10*SC)+S.nameY*(H/100)*0.5;
-    g.fillText(S.name,bx,by);g.shadowColor='transparent';
+    if(S.nameSh){g.shadowColor='rgba(0,0,0,.6)';g.shadowBlur=8*SC;g.shadowOffsetY=2*SC;}
+    if(S.nameSw>0){g.lineJoin='round';g.strokeStyle=S.nameScol;g.lineWidth=S.nameSw*SC;g.strokeText(S.name,bx,by);}
+    g.fillStyle=S.nameCol;g.fillText(S.name,bx,by);
+    g.shadowColor='transparent';
   }
 
   // 6. พาดหัว + เส้นใต้
@@ -452,14 +524,28 @@ function render(g,SC){
       while(g.measureText(S.head).width>maxW && fs>30*SC){fs-=4*SC;g.font=`800 ${fs}px '${S.headFont}',sans-serif`;}}
     g.font=`800 ${fs}px '${S.headFont}',sans-serif`;
     g.textAlign='center';g.textBaseline='alphabetic';
-    const cx=W/2+S.headX*(W/100)*0.5;
-    const lineY=H-M-30*SC+S.headY*(H/100)*0.5;
+    const cx=W/2+S.headX*(W/100)*1.2;
+    const lineY=H-M-70*SC+S.headY*(H/100)*1.5;
     const textY=lineY-40*SC;
-    g.lineJoin='round';g.strokeStyle='rgba(40,20,10,.9)';g.lineWidth=fs*0.09;
-    g.shadowColor='rgba(0,0,0,.55)';g.shadowBlur=14*SC;g.shadowOffsetY=6*SC;
-    g.strokeText(S.head,cx,textY);g.shadowColor='transparent';
-    g.fillStyle='#fff';g.fillText(S.head,cx,textY);
-    if(S.headLine){g.fillStyle='#fff';g.fillRect(M,lineY,W-M*2,6*SC);}
+    const tw=g.measureText(S.head).width;
+
+    // ไฮไลต์พื้นหลังข้อความ
+    if(S.headHl){
+      g.fillStyle=S.headHlcol;
+      const padX=28*SC,padT=fs*0.9,padB=fs*0.28;
+      g.fillRect(cx-tw/2-padX, textY-padT, tw+padX*2, padT+padB);
+    }
+    // เงา (ใส่ก่อนวาดขอบ/ตัว)
+    if(S.headSh){g.shadowColor=S.headShcol;g.shadowBlur=S.headShb*SC;
+      g.shadowOffsetX=S.headShx*SC;g.shadowOffsetY=S.headShy*SC;}
+    // ขอบ
+    if(S.headSw>0){g.lineJoin='round';g.strokeStyle=S.headScol;g.lineWidth=S.headSw*SC;g.strokeText(S.head,cx,textY);}
+    // ตัวอักษร (ปิดเงาถ้าวาดขอบไปแล้ว เพื่อไม่ให้เงาซ้อน)
+    if(S.headSw>0){g.shadowColor='transparent';}
+    g.fillStyle=S.headCol;g.fillText(S.head,cx,textY);
+    g.shadowColor='transparent';g.shadowOffsetX=0;g.shadowOffsetY=0;
+
+    if(S.headLine){g.fillStyle=S.headCol;g.fillRect(M,lineY,W-M*2,6*SC);}
   }
 }
 function draw(){render(ctx,1);}
